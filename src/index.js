@@ -5,10 +5,12 @@ const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
 const User = require('./resolvers/User')
 const Link = require('./resolvers/Link')
+const Subscription = require ('./resolvers/Subscription')
 
 const resolvers = {
     Query,
     Mutation,
+    Subscription,
     Link,
     User
 }
@@ -24,4 +26,3 @@ const server = new GraphQLServer({
 })
 server.start(() => console.log('Serve running. port 4000'))
 
-//TODO SPOSTA IMPLEMENTAZIONI RESOLVERS IN FILES
