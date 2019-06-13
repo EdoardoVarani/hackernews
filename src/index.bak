@@ -1,0 +1,44 @@
+const { GraphQLServer } = require('graphql-yoga')
+
+let links= [{
+    id: 'link-0',
+    description: 'Il mio link 0',
+    url: "localhost:ciao"
+}]
+let idCount = links.length
+
+const resolvers = {
+    Query: {
+        info: () => "base API",
+        feed: () => links,
+        link:(id, args) => {
+          /* links.forEach(function (id){
+               console.log(parent.link)
+                if(links.id == id) return parent.link;
+           }) */
+           links.forEach(element => {
+               if(element.id==args.id){
+                   console.log(element)
+                   return element
+               }
+           })
+                    }
+    },
+    Mutation: {
+        post: (parent, args) => {
+            const link = {
+                id: `link-${idCount++}`,
+                description: args.description,
+                url: args.url,
+            }
+            links.push(link)
+            return link
+        }
+    }
+}
+
+const server = new GraphQLServer({
+    typeDefs: 'schema.graphql',
+    resolvers
+})
+server.start(() => console.log('Serve running. port 4000'))
