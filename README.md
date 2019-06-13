@@ -1,0 +1,2 @@
+# hackernews
+Nodejs + GraphQL + Prisma
